@@ -33,10 +33,13 @@ $passworduser= htmlspecialchars($_POST["password"]);
                     <div class="col-md-10 col-lg-8 col-xl-7">
                             <!-- recuperation des dponnées sumit et traitement-->
                         <?php if(!empty($nameUser) && !empty($mailuser) && !empty($passworduser)) : ;?>
+                        
                             <?php /*langage sql et connection avec BDN */ $select = "SELECT * FROM `stockageusers`";?>
+
                             <?php $query = $dataMysql -> query($select);?>
                             <?php $Users = $query -> fetchAll();?>
                             <?php/* parcouris le tableau de BDn*/ foreach($Users as $user):;?>
+
                             <?php/* verification de données de l'utilisateur dans le BDn*/
                                 if($user["nom"] == $nameUser &&
                                 $user["mail"] == $mailuser && $user["code"] == $passworduser):;
