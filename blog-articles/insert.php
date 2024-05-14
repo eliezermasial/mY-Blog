@@ -1,29 +1,28 @@
 <?php
-/*
 require_once("connect.php");
 //recuperation des valeurs pouchés;
-$nameUser= htmlspecialchars($_POST["name"]);
-$mailuser= htmlspecialchars($_POST["email"]);
-$passworduser= htmlspecialchars($_POST["password"]);
+$id= htmlspecialchars($_POST["id"]);
+$title= htmlspecialchars($_POST["titre"]);
+$titleTwo= htmlspecialchars($_POST["titre2"]);
+$contenus= htmlspecialchars($_POST["story"]);
 
 //on verifie si les camps n'est pas vide;
-if(!empty($nameUser) && !empty($mailuser) && !empty($passworduser)){
-    if(!filter_var($mailuser,FILTER_VALIDATE_EMAIL)){
-        echo "email n'est pas valide";
-    }
-    
+if(!empty($id) && !empty($title) && !empty($titleTwo) && !empty($contenus)){
+
     //insertion des données dans langages SQl;
-    $inserto = "INSERT INTO `stockageusers`(`nom`,`mail`,`code`) VALUES ( :nom, :mail, :code)";
+    $insertTo = "INSERT INTO `articles`(`id`,`titre`,`deuxieme_titre`,`contenus`) VALUES ( :id, :titre, :deuxieme_titre, :contenus)";
     //preparer l'insertion;
-    $prepareDn = $dataMysql -> prepare($inserto);
+    $prepareDn = $dataMysql -> prepare($insertTo);
     //execute l'insertion;
-    $executTo = $prepareDn -> execute( [":nom"=>$nameUser,":mail"=>$mailuser,":code"=>$passworduser]);
+    $executTo = $prepareDn -> execute([":id"=>$id,":titre"=>$title,"deuxieme_titre"=>$titleTwo,":contenus"=>$contenus]);
     //on verifie si le code s'execute;
     if($executTo){
-        echo 'vous avez crée un compte';
+
+        echo '<h1>vous avez ajouté un article</h1>';
     }
+
 }else {
     echo "veillez remplir correctement les champs";
-}
-*/
+} 
+
 ?>

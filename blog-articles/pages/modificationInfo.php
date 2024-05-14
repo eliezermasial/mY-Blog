@@ -1,11 +1,15 @@
 <?php
-require_once("../connect.php");
+    require_once("../connect.php");
+    //recuperation des dponnées sumit et traitement.
+    if(empty($_POST["name"]) && empty($_POST["email"]) && empty($_POST["password"])){
+        echo "impossible de se connecter veillez vous rendre dans la page securityUser pour vous connecter";
+    }
 
-//declaration des variables et recuperation des valeurs; 
-$nameUser= htmlspecialchars($_POST["name"]);
-$mailuser= htmlspecialchars($_POST["email"]);
-$passworduser= htmlspecialchars($_POST["password"]);
-
+    //declaration des variables et recuperation des valeurs; 
+    $nameUser= htmlspecialchars($_POST["name"]);
+    $mailuser= htmlspecialchars($_POST["email"]);
+    $passworduser= htmlspecialchars($_POST["password"]);
+    
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +19,7 @@ $passworduser= htmlspecialchars($_POST["password"]);
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Clean Blog - Start Bootstrap Theme</title>
+        <title>Tamba Blog </title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -26,42 +30,47 @@ $passworduser= htmlspecialchars($_POST["password"]);
         <link href="../css/styles.css" rel="stylesheet" />
     </head>
     <body>
+
+        <?php /*langage sql et connection avec BDN */ $select = "SELECT * FROM `stockageusers`";?>
+
+        <?php $query = $dataMysql -> query($select);?>
+        <?php $Users = $query -> fetchAll();?>
+
+        <!-- parcouris le tableau de BDn --> 
+        <?php foreach($Users as $user):;?>
+
+        <!--verification de données de l'utilisateur dans le BDn-->
+        <?php
+            if($user["nom"] == $nameUser &&
+            $user["mail"] == $mailuser && $user["code"] == $passworduser):;
+        ?>
         <!-- Main Content-->
         <main class="mb-4">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                            <!-- recuperation des dponnées sumit et traitement-->
-                        <?php if(!empty($nameUser) && !empty($mailuser) && !empty($passworduser)) : ;?>
-                        
-                            <?php /*langage sql et connection avec BDN */ $select = "SELECT * FROM `stockageusers`";?>
-
-                            <?php $query = $dataMysql -> query($select);?>
-                            <?php $Users = $query -> fetchAll();?>
-                            <?php/* parcouris le tableau de BDn*/ foreach($Users as $user):;?>
-
-                            <?php/* verification de données de l'utilisateur dans le BDn*/
-                                if($user["nom"] == $nameUser &&
-                                $user["mail"] == $mailuser && $user["code"] == $passworduser):;
-                            ?>
                         <h3 class="fw-bold">vous etes connecté</h3>
                         <div class="my-5">
 
-                            <form id="contactForm" action="" method="POST" data-sb-form-api-token="API_TOKEN">
+                            <form id="contactForm" action="../insert.php" method="POST" data-sb-form-api-token="API_TOKEN">
                                 <div class="form-floating">
-                                    <input class="form-control" name="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
-                                    <label for="name">Name</label>
+                                    <input class="form-control" name="id" type="text" placeholder="Enter number of id..." data-sb-validations="required" />
+                                    <label for="name">id of article</label>
                                     <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                                 </div>
                                 <div class="form-floating">
-                                    <input class="form-control" name="email" type="email" placeholder="Enter your email..." data-sb-validations="required,email" />
-                                    <label for="email">Email address</label>
-                                    <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                    <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                                    <input class="form-control" name="titre" type="text" placeholder="Enter your email..." data-sb-validations="required,text" />
+                                    <label for="text">title of sujet</label>
+                                  
                                 </div>
                                 <div class="form-floating">
-                                    <input class="form-control" name="password" type="password" placeholder="Enter your password..." data-sb-validations="required" />
-                                    <label for="phone">password</label>
+                                    <input class="form-control" name="titre2" type="text" placeholder="Enter your titre..." data-sb-validations="required,text" />
+                                    <label for="text">title two of sujet</label>
+                                    
+                                </div>
+                                <div class="form-floating">
+                                    <textarea class="form-control" name="story" rows="5" cols="33" placeholder="Enter your sujet..." data-sb-validations="required"> </textarea>
+                                    <label for="phone">Enter your story...</label>
                                     <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
                                 </div>
 
@@ -69,9 +78,6 @@ $passworduser= htmlspecialchars($_POST["password"]);
                                 
                             </form>
                         </div>
-                        <?php endif;?>
-                        <?php endforeach;?>
-                        <?php endif;?>
                         
                     </div>
                 </div>
@@ -113,6 +119,8 @@ $passworduser= htmlspecialchars($_POST["password"]);
                 </div>
             </div>
         </footer>
+        <?php endif;?>
+        <?php endforeach;?>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

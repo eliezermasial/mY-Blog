@@ -23,7 +23,7 @@ require_once('session.php');
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.html">ELIEZER TAMBA</a>
+                <a class="navbar-brand" href="#">TAMBA Blog</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
@@ -32,8 +32,7 @@ require_once('session.php');
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.php">Home</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="pages/about.php">About</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="pages/post.php">Sample Post</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="pages/contact.php">ADM</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="pages/contact.php">contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -44,8 +43,8 @@ require_once('session.php');
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
-                            <h1>Clean Blog</h1>
-                            <span class="subheading">A Blog Theme by Start Bootstrap</span>
+                            <h1>TAMBA Blog</h1>
+                            <span class="subheading">A Blog Theme by articles</span>
                         </div>
                     </div>
                 </div>
@@ -59,9 +58,9 @@ require_once('session.php');
                     <!-- Post preview-->
                     <div class="post-preview">
                         
-                        <a href="pages/post.php?id=<?= $article["id"] ?>">
+                        <a href="pages/post.php?id=<?= $article["id"] ?>" target="_self">
                             <h2 class="pages/post-title"><?= $article["titre"]; ?></h2>
-                            <h3 class="pages/post-subtitle"><?= $article["deuxieme titre"]; ?></h3>
+                            <h3 class="pages/post-subtitle"><?= $article["deuxieme_titre"]; ?></h3>
                         </a>
                         <!-- 
                         <p class="post-meta">
@@ -72,7 +71,7 @@ require_once('session.php');
                     </div>
                     <!-- Divider-->
                     <hr class="my-4" />
-                    <?php endforeach; ?>
+                <?php endforeach; ?>
                     <!-- Pager-->
                     <div class="d-flex justify-content-end mb-4">
                         <a class="btn btn-primary text-uppercase" href="pages/post.php">Older Posts →</a>
@@ -111,14 +110,12 @@ require_once('session.php');
                                 </a>
                             </li>
                         </ul>
-                        <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2023</div>
+                        <div class="small text-center text-muted fst-italic">dev &copy; by eliezer tamba</div>
                     </div>
                 </div>
             </div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
     </body>
 </html>
